@@ -1,0 +1,64 @@
+name: Actualizar datos ENOE
+
+on:
+  schedule:
+    - cron: '0 0 1 1,4,7,10 *'  # 1 de enero, abril, julio, octubre
+  workflow_dispatch:  # Ejecución manual desde GitHub
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v4
+      
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      
+      - name: Instalar dependencias
+        run: |
+          pip install -r requirements.txt
+      
+      - name: Instalar TeraboxUploaderCLI
+        run: |
+          git clone https://github.com/dnigamer/TeraboxUploaderCLI.git
+          cd TeraboxUploaderCLI
+          pip install -r requirements.txt
+      
+      - name: Crear configuración de Terabox
+        run: |
+          cat > TeraboxUploaderCLI/secrets.json << EOF
+          {
+            "jstoken": "${{ secrets.TERABOX_JSTOKEN }}",
+            "cookies": {
+              "csrfToken": "${{ secrets.TERABOX_CSRF }}",
+              "browserid": "${{ secrets.TERABOX_BROWSERID }}",
+              "lang": "${{ secrets.TERABOX_LANG }}",
+              "ndus": "${{ secrets.TERABOX_NDUS }}",
+              "ndut_fmt": "${{ secrets.TERABOX_NDUT_FMT }}"
+            }
+          }
+          EOF
+      
+      - name: Ejecutar script de descarga y limpieza
+        run: python scripts/01_descarga_limpieza.py
+      
+      - name: Ejecutar modelos
+        run: python scripts/02_modelos.py
+      
+      - name: Ejecutar métricas
+        run: python scripts/03_metricas.py
+      
+      - name: Subir resultados a Terabox
+        run: python scripts/04_subir_terabox.py
+      
+      - name: Guardar resultados en repositorio (backup)
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add resultados/
+          git commit -m "Actualización automática de resultados" || echo "Sin cambios"
+          git push

@@ -1,0 +1,16 @@
+streamlit
+pandas
+numpy
+plotly
+pymc
+arviz
+statsmodels
+requests
+geopandas
+scipy
+openpyxl
+matplotlib
+seaborn
+scikit-learn
+terabox-downloader
+terabox-gateway

@@ -1,0 +1,60 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+venv/
+.venv/
+env/
+.env
+ENV/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+
+# Streamlit
+.streamlit/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Project Specific
+# Ignorar archivos en datos_brutos excepto .gitkeep para mantener la estructura
+datos_brutos/*
+!datos_brutos/.gitkeep
+
+# Ignorar archivos en resultados excepto .gitkeep para mantener la estructura
+resultados/*
+!resultados/.gitkeep
+
+# Ignorar credenciales y configuraciones temporales de Terabox
+terabox_config.json
+TeraboxUploaderCLI/
+EOF
+secret.json
+secrets.json
+*.nc
