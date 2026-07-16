@@ -35,7 +35,7 @@ URLS = {
     "metricas_sectoriales": "https://drive.google.com/uc?export=download&id=14XgdFCUjldBr70918scHGy3n64EYx68r",
     "beta_mincer_estado": "https://drive.google.com/uc?export=download&id=1dSlx8dxcfRiu9v2NlxjWjKCd3cQi4qCa",
     # Si no usas oaxaca_estado, coméntalo o elimínalo:
-    # "oaxaca_estado": "https://drive.google.com/uc?export=download&id=T1VakZMzmukDxEjIVnRM0BjaydFMiDBq5a",
+    "oaxaca_estado": "https://drive.google.com/uc?export=download&id=1VakZMzmukDxEjIVnRM0BjaydFMiDBq5a",
 }
 
 # ============================================
